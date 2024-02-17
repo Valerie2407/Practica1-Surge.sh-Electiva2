@@ -1,0 +1,23 @@
+name: Deploy to Surge
+
+on:
+  push:
+    branches:
+      - main  # Puedes ajustar esto según la rama que desees
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v2
+
+    - name: Instalar dependencias
+      run: |
+        npm install -g surge
+
+    - name: Construir y desplegar en Surge
+      run: |
+        npm run build  # Ajusta esto según el comando para construir tu proyecto
+        surge ./dist --domain NOMBRE_DE_TU_DOMINIO.surge.sh  # Reemplaza NOMBRE_DE_TU_DOMINIO con tu dominio en surge.sh
